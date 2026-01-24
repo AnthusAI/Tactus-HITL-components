@@ -1,0 +1,1056 @@
+/**
+ * Shadcn-inspired styles for Tactus HITL components.
+ *
+ * Design tokens and styling based on Shadcn UI's design system.
+ * Uses HSL colors for easy theming and modern aesthetics.
+ */
+
+/* Import Geist Sans font (Shadcn's recommended font) */
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap');
+
+/* Fallback to Inter if Geist is unavailable */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+/* =============================================================================
+   CSS Variables (Shadcn-inspired Theme)
+   ============================================================================= */
+
+:root {
+  --tactus-hitl-font-sans: 'Geist', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Background */
+  --tactus-hitl-background: 0 0% 100%;
+  --tactus-hitl-foreground: 222.2 84% 4.9%;
+
+  /* Card */
+  --tactus-hitl-card: 0 0% 100%;
+  --tactus-hitl-card-foreground: 222.2 84% 4.9%;
+
+  /* Muted */
+  --tactus-hitl-muted: 210 40% 96.1%;
+  --tactus-hitl-muted-foreground: 215.4 16.3% 46.9%;
+
+  /* Border */
+  --tactus-hitl-border: 214.3 31.8% 91.4%;
+  --tactus-hitl-input: 214.3 31.8% 91.4%;
+
+  /* Primary */
+  --tactus-hitl-primary: 222.2 47.4% 11.2%;
+  --tactus-hitl-primary-foreground: 210 40% 98%;
+
+  /* Secondary */
+  --tactus-hitl-secondary: 210 40% 96.1%;
+  --tactus-hitl-secondary-foreground: 222.2 47.4% 11.2%;
+
+  /* Accent */
+  --tactus-hitl-accent: 210 40% 96.1%;
+  --tactus-hitl-accent-foreground: 222.2 47.4% 11.2%;
+
+  /* Destructive */
+  --tactus-hitl-destructive: 0 84.2% 60.2%;
+  --tactus-hitl-destructive-foreground: 210 40% 98%;
+
+  /* Ring */
+  --tactus-hitl-ring: 222.2 84% 4.9%;
+
+  /* Radius */
+  --tactus-hitl-radius: 0.5rem;
+}
+
+/* Theme wrapper (host-controlled) */
+.tactus-hitl-theme {
+  --tactus-hitl-background: 0 0% 100%;
+  --tactus-hitl-foreground: 222.2 84% 4.9%;
+
+  --tactus-hitl-card: 0 0% 100%;
+  --tactus-hitl-card-foreground: 222.2 84% 4.9%;
+
+  --tactus-hitl-muted: 210 40% 96.1%;
+  --tactus-hitl-muted-foreground: 215.4 16.3% 46.9%;
+
+  --tactus-hitl-border: 214.3 31.8% 91.4%;
+  --tactus-hitl-input: 214.3 31.8% 91.4%;
+
+  --tactus-hitl-primary: 222.2 47.4% 11.2%;
+  --tactus-hitl-primary-foreground: 210 40% 98%;
+
+  --tactus-hitl-secondary: 210 40% 96.1%;
+  --tactus-hitl-secondary-foreground: 222.2 47.4% 11.2%;
+
+  --tactus-hitl-accent: 210 40% 96.1%;
+  --tactus-hitl-accent-foreground: 222.2 47.4% 11.2%;
+
+  --tactus-hitl-destructive: 0 84.2% 60.2%;
+  --tactus-hitl-destructive-foreground: 210 40% 98%;
+
+  --tactus-hitl-ring: 222.2 84% 4.9%;
+
+  /* Don't apply background/color to wrapper - let components style themselves */
+  /* background-color: hsl(var(--tactus-hitl-background)); */
+  /* color: hsl(var(--tactus-hitl-foreground)); */
+}
+
+/* Dark theme support (placed after light wrapper to override) */
+.tactus-hitl-theme.dark {
+  --tactus-hitl-background: 222.2 84% 4.9%;
+  --tactus-hitl-foreground: 210 40% 98%;
+
+  --tactus-hitl-card: 222.2 84% 4.9%;
+  --tactus-hitl-card-foreground: 210 40% 98%;
+
+  --tactus-hitl-muted: 217.2 32.6% 17.5%;
+  --tactus-hitl-muted-foreground: 215 20.2% 65.1%;
+
+  --tactus-hitl-border: 217.2 32.6% 17.5%;
+  --tactus-hitl-input: 217.2 32.6% 17.5%;
+
+  --tactus-hitl-primary: 210 40% 98%;
+  --tactus-hitl-primary-foreground: 222.2 47.4% 11.2%;
+
+  --tactus-hitl-secondary: 217.2 32.6% 17.5%;
+  --tactus-hitl-secondary-foreground: 210 40% 98%;
+
+  --tactus-hitl-accent: 217.2 32.6% 17.5%;
+  --tactus-hitl-accent-foreground: 210 40% 98%;
+
+  --tactus-hitl-destructive: 0 62.8% 30.6%;
+  --tactus-hitl-destructive-foreground: 210 40% 98%;
+
+  --tactus-hitl-ring: 212.7 26.8% 83.9%;
+}
+
+/* =============================================================================
+   Base Styles
+   ============================================================================= */
+
+* {
+  border-color: hsl(var(--tactus-hitl-border));
+}
+
+/* Apply font to all HITL components */
+[class*="tactus-hitl-"] {
+  font-family: var(--tactus-hitl-font-sans);
+}
+
+/* =============================================================================
+   Header
+   ============================================================================= */
+
+.tactus-hitl-header {
+  margin-bottom: 1rem;
+}
+
+.tactus-hitl-header-top {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: hsl(var(--tactus-hitl-muted-foreground));
+}
+
+.tactus-hitl-procedure-name {
+  font-weight: 500;
+  color: hsl(var(--tactus-hitl-foreground));
+}
+
+.tactus-hitl-subject {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.625rem;
+  border-radius: calc(var(--tactus-hitl-radius) - 2px);
+  font-size: 0.75rem;
+  font-weight: 500;
+  background-color: hsl(var(--tactus-hitl-secondary));
+  color: hsl(var(--tactus-hitl-secondary-foreground));
+}
+
+.tactus-hitl-elapsed {
+  margin-left: auto;
+}
+
+.tactus-hitl-message {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: hsl(var(--tactus-hitl-foreground));
+}
+
+/* =============================================================================
+   Buttons (Shadcn style)
+   ============================================================================= */
+
+.tactus-hitl-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  border-radius: var(--tactus-hitl-radius);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  ring-offset-background: hsl(var(--tactus-hitl-background));
+  padding: 0.5rem 1rem;
+  height: 2.5rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.tactus-hitl-button:focus-visible {
+  outline: 2px solid hsl(var(--tactus-hitl-ring));
+  outline-offset: 2px;
+}
+
+.tactus-hitl-button:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.tactus-hitl-button-primary {
+  background-color: hsl(var(--tactus-hitl-primary));
+  color: hsl(var(--tactus-hitl-primary-foreground));
+}
+
+.tactus-hitl-button-primary:hover:not(:disabled) {
+  background-color: hsl(var(--tactus-hitl-primary) / 0.9);
+}
+
+.tactus-hitl-button-danger {
+  background-color: hsl(var(--tactus-hitl-destructive));
+  color: hsl(var(--tactus-hitl-destructive-foreground));
+}
+
+.tactus-hitl-button-danger:hover:not(:disabled) {
+  background-color: hsl(var(--tactus-hitl-destructive) / 0.9);
+}
+
+.tactus-hitl-button-secondary {
+  background-color: hsl(var(--tactus-hitl-secondary));
+  color: hsl(var(--tactus-hitl-secondary-foreground));
+}
+
+.tactus-hitl-button-secondary:hover:not(:disabled) {
+  background-color: hsl(var(--tactus-hitl-secondary) / 0.8);
+}
+
+.tactus-hitl-button-default {
+  border-color: hsl(var(--tactus-hitl-input));
+  background-color: hsl(var(--tactus-hitl-background));
+  color: hsl(var(--tactus-hitl-foreground));
+}
+
+.tactus-hitl-button-default:hover:not(:disabled) {
+  background-color: hsl(var(--tactus-hitl-accent));
+  color: hsl(var(--tactus-hitl-accent-foreground));
+}
+
+/* Actions container */
+.tactus-hitl-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+/* =============================================================================
+   AI Elements - Confirmation
+   ============================================================================= */
+
+.tactus-ai-confirmation {
+  border: 1px solid hsl(var(--tactus-hitl-border));
+  background-color: hsl(var(--tactus-hitl-card));
+  color: hsl(var(--tactus-hitl-card-foreground));
+  border-radius: calc(var(--tactus-hitl-radius) + 0.125rem);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tactus-ai-confirmation-title {
+  font-weight: 600;
+  color: hsl(var(--tactus-hitl-foreground));
+}
+
+.tactus-ai-confirmation-request {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: hsl(var(--tactus-hitl-foreground));
+}
+
+.tactus-ai-confirmation-accepted,
+.tactus-ai-confirmation-rejected {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.tactus-ai-confirmation-accepted {
+  color: hsl(142.1 76.2% 36.3%);
+}
+
+.tactus-ai-confirmation-rejected {
+  color: hsl(var(--tactus-hitl-destructive));
+}
+
+.tactus-ai-confirmation-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.tactus-ai-card {
+  border: 1px solid hsl(var(--tactus-hitl-border));
+  border-radius: calc(var(--tactus-hitl-radius) + 0.125rem);
+  background-color: hsl(var(--tactus-hitl-card));
+  color: hsl(var(--tactus-hitl-card-foreground));
+  padding: 1rem;
+}
+
+.tactus-ai-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tactus-ai-input {
+  border-radius: calc(var(--tactus-hitl-radius) - 2px);
+  border: 1px solid hsl(var(--tactus-hitl-border));
+  background-color: hsl(var(--tactus-hitl-background));
+  color: hsl(var(--tactus-hitl-foreground));
+}
+
+.tactus-ai-option {
+  border-radius: calc(var(--tactus-hitl-radius) - 2px);
+  background-color: hsl(var(--tactus-hitl-muted));
+}
+
+.tactus-ai-dropzone {
+  border-radius: calc(var(--tactus-hitl-radius) + 0.125rem);
+  background-color: hsl(var(--tactus-hitl-muted));
+}
+
+.tactus-ai-alert {
+  border-left-width: 4px;
+}
+
+/* =============================================================================
+   Form Elements (Shadcn style)
+   ============================================================================= */
+
+.tactus-hitl-textfield,
+.tactus-hitl-textarea,
+.tactus-hitl-dropdown {
+  display: flex;
+  width: 100%;
+  border-radius: var(--tactus-hitl-radius);
+  border: 1px solid hsl(var(--tactus-hitl-input));
+  background-color: hsl(var(--tactus-hitl-background));
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: hsl(var(--tactus-hitl-foreground));
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, box-shadow;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.tactus-hitl-textfield::placeholder,
+.tactus-hitl-textarea::placeholder {
+  color: hsl(var(--tactus-hitl-muted-foreground));
+}
+
+.tactus-hitl-textfield:focus,
+.tactus-hitl-textarea:focus,
+.tactus-hitl-dropdown:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px hsl(var(--tactus-hitl-ring));
+}
+
+.tactus-hitl-textfield:disabled,
+.tactus-hitl-textarea:disabled,
+.tactus-hitl-dropdown:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.tactus-hitl-textarea {
+  resize: vertical;
+  min-height: 5rem;
+}
+
+/* =============================================================================
+   Radio & Checkbox Groups
+   ============================================================================= */
+
+.tactus-hitl-radio-group,
+.tactus-hitl-checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tactus-hitl-radio-option,
+.tactus-hitl-checkbox-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: var(--tactus-hitl-radius);
+  cursor: pointer;
+  transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tactus-hitl-radio-option:hover,
+.tactus-hitl-checkbox-option:hover {
+  background-color: hsl(var(--tactus-hitl-accent));
+}
+
+.tactus-hitl-radio,
+.tactus-hitl-checkbox {
+  margin-top: 0.125rem;
+  height: 1rem;
+  width: 1rem;
+  border-radius: 9999px;
+  border: 1px solid hsl(var(--tactus-hitl-primary));
+  flex-shrink: 0;
+}
+
+.tactus-hitl-checkbox {
+  border-radius: calc(var(--tactus-hitl-radius) - 2px);
+}
+
+.tactus-hitl-radio-label,
+.tactus-hitl-checkbox-label {
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: hsl(var(--tactus-hitl-foreground));
+}
+
+.tactus-hitl-radio-description,
+.tactus-hitl-checkbox-description {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: hsl(var(--tactus-hitl-muted-foreground));
+}
+
+/* =============================================================================
+   Context Panel (Collapsible Card)
+   ============================================================================= */
+
+.tactus-hitl-context {
+  margin: 1rem 0;
+  border-radius: var(--tactus-hitl-radius);
+  border: 1px solid hsl(var(--tactus-hitl-border));
+  background-color: hsl(var(--tactus-hitl-card));
+  color: hsl(var(--tactus-hitl-card-foreground));
+}
+
+.tactus-hitl-context-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  color: hsl(var(--tactus-hitl-foreground));
+  background: transparent;
+  border: none;
+  border-radius: var(--tactus-hitl-radius);
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tactus-hitl-context-toggle:hover {
+  background-color: hsl(var(--tactus-hitl-accent));
+}
+
+.tactus-hitl-context-toggle-icon {
+  color: hsl(var(--tactus-hitl-muted-foreground));
+  flex-shrink: 0;
+}
+
+.tactus-hitl-context-content {
+  padding: 0 1rem 1rem;
+  border-top: 1px solid hsl(var(--tactus-hitl-border));
+}
+
+.tactus-hitl-context-section {
+  margin-top: 1rem;
+}
+
+.tactus-hitl-context-section:first-child {
+  margin-top: 0.75rem;
+}
+
+.tactus-hitl-context-section-title {
+  margin: 0 0 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: hsl(var(--tactus-hitl-muted-foreground));
+}
+
+/* Input summary */
+.tactus-hitl-input-summary {
+  margin: 0;
+}
+
+.tactus-hitl-input-summary-item {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.375rem 0;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.tactus-hitl-input-summary-item dt {
+  font-weight: 500;
+  min-width: 8rem;
+  color: hsl(var(--tactus-hitl-foreground));
+}
+
+.tactus-hitl-input-summary-item dd {
+  margin: 0;
+  color: hsl(var(--tactus-hitl-muted-foreground));
+}
+
+/* Prior interactions */
+.tactus-hitl-prior-interactions {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tactus-hitl-prior-interaction {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.375rem 0;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.tactus-hitl-prior-interaction-type {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.5rem;
+  border-radius: calc(var(--tactus-hitl-radius) - 2px);
+  font-family: ui-monospace, monospace;
+  font-size: 0.75rem;
+  background-color: hsl(var(--tactus-hitl-muted));
+  color: hsl(var(--tactus-hitl-muted-foreground));
+}
+
+.tactus-hitl-prior-interaction-response {
+  font-weight: 500;
+  color: hsl(142.1 76.2% 36.3%); /* Green-600 */
+}
+
+/* Conversation */
+.tactus-hitl-conversation {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tactus-hitl-conversation-message {
+  padding: 0.75rem;
+  border-radius: var(--tactus-hitl-radius);
+  background-color: hsl(var(--tactus-hitl-muted));
+}
+
+.tactus-hitl-conversation-role {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1rem;
+  text-transform: capitalize;
+  color: hsl(var(--tactus-hitl-muted-foreground));
+}
+
+.tactus-hitl-conversation-content {
+  display: block;
+  white-space: pre-wrap;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  color: hsl(var(--tactus-hitl-foreground));
+}
+
+.tactus-hitl-conversation-tool {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: hsl(var(--tactus-hitl-muted-foreground));
+}
+
+/* =============================================================================
+   Review Panel (Card with artifact display)
+   ============================================================================= */
+
+.tactus-hitl-artifact {
+  margin: 1rem 0;
+  border-radius: var(--tactus-hitl-radius);
+  border: 1px solid hsl(var(--tactus-hitl-border));
+  background-color: hsl(var(--tactus-hitl-card));
+  overflow: hidden;
+}
+
+.tactus-hitl-artifact-header {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid hsl(var(--tactus-hitl-border));
+  background-color: hsl(var(--tactus-hitl-muted));
+}
+
+.tactus-hitl-artifact-type {
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1rem;
+  text-transform: capitalize;
+  color: hsl(var(--tactus-hitl-muted-foreground));
+}
+
+.tactus-hitl-artifact-content {
+  padding: 1rem;
+}
+
+.tactus-hitl-artifact-code {
+  margin: 0;
+  padding: 1rem;
+  border-radius: calc(var(--tactus-hitl-radius) - 2px);
+  background-color: hsl(220 13% 13%);
+  color: hsl(220 14% 96%);
+  overflow-x: auto;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+}
+
+.tactus-hitl-artifact-text {
+  white-space: pre-wrap;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  color: hsl(var(--tactus-hitl-foreground));
+}
+
+.tactus-hitl-review-feedback {
+  margin: 1rem 0;
+}
+
+.tactus-hitl-review-feedback-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  color: hsl(var(--tactus-hitl-foreground));
+}
+
+/* =============================================================================
+   File Upload (Dropzone with Shadcn styling)
+   ============================================================================= */
+
+.tactus-hitl-dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  border: 2px dashed hsl(var(--tactus-hitl-border));
+  border-radius: var(--tactus-hitl-radius);
+  cursor: pointer;
+  transition: border-color 150ms cubic-bezier(0.4, 0, 0.2, 1), background-color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tactus-hitl-dropzone:hover,
+.tactus-hitl-dropzone-active {
+  border-color: hsl(var(--tactus-hitl-primary));
+  background-color: hsl(var(--tactus-hitl-accent));
+}
+
+.tactus-hitl-file-input {
+  display: none;
+}
+
+.tactus-hitl-dropzone-content {
+  text-align: center;
+}
+
+.tactus-hitl-dropzone-icon {
+  display: block;
+  margin-bottom: 0.75rem;
+  color: hsl(var(--tactus-hitl-muted-foreground));
+}
+
+.tactus-hitl-dropzone-text {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  color: hsl(var(--tactus-hitl-foreground));
+}
+
+.tactus-hitl-dropzone-hint {
+  display: block;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: hsl(var(--tactus-hitl-muted-foreground));
+}
+
+.tactus-hitl-upload-error {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  border-radius: var(--tactus-hitl-radius);
+  background-color: hsl(0 84.2% 60.2% / 0.1);
+  border: 1px solid hsl(var(--tactus-hitl-destructive));
+  color: hsl(var(--tactus-hitl-destructive));
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  white-space: pre-line;
+}
+
+.tactus-hitl-file-list {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+}
+
+.tactus-hitl-file-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border: 1px solid hsl(var(--tactus-hitl-border));
+  border-radius: var(--tactus-hitl-radius);
+  margin-bottom: 0.5rem;
+  background-color: hsl(var(--tactus-hitl-card));
+}
+
+.tactus-hitl-file-name {
+  flex: 1;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: hsl(var(--tactus-hitl-foreground));
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tactus-hitl-file-size {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: hsl(var(--tactus-hitl-muted-foreground));
+}
+
+.tactus-hitl-file-remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  font-size: 1rem;
+  font-weight: 400;
+  color: hsl(var(--tactus-hitl-muted-foreground));
+  background: transparent;
+  border: none;
+  border-radius: calc(var(--tactus-hitl-radius) - 2px);
+  cursor: pointer;
+  transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1), color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tactus-hitl-file-remove:hover {
+  background-color: hsl(var(--tactus-hitl-destructive) / 0.1);
+  color: hsl(var(--tactus-hitl-destructive));
+}
+
+/* =============================================================================
+   Escalation Alert (Alert component with severity variants)
+   ============================================================================= */
+
+.tactus-hitl-escalation {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: var(--tactus-hitl-radius);
+  border: 1px solid;
+}
+
+.tactus-hitl-escalation-info {
+  background-color: hsl(221.2 83.2% 53.3% / 0.1);
+  border-color: hsl(221.2 83.2% 53.3% / 0.5);
+  color: hsl(221.2 83.2% 53.3%);
+}
+
+.tactus-hitl-escalation-warning {
+  background-color: hsl(38 92% 50% / 0.1);
+  border-color: hsl(38 92% 50% / 0.5);
+  color: hsl(38 92% 50%);
+}
+
+.tactus-hitl-escalation-error {
+  background-color: hsl(0 84.2% 60.2% / 0.1);
+  border-color: hsl(var(--tactus-hitl-destructive) / 0.5);
+  color: hsl(var(--tactus-hitl-destructive));
+}
+
+.tactus-hitl-escalation-critical {
+  background-color: hsl(0 100% 50% / 0.15);
+  border-color: hsl(0 100% 50% / 0.7);
+  color: hsl(0 100% 40%);
+}
+
+.tactus-hitl-escalation-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.tactus-hitl-escalation-content {
+  flex: 1;
+}
+
+.tactus-hitl-escalation-context {
+  margin-top: 0.75rem;
+}
+
+/* =============================================================================
+   Inputs (Batched/Tabbed Inputs)
+   ============================================================================= */
+
+.tactus-hitl-inputs {
+  background-color: hsl(var(--tactus-hitl-card));
+  border: 1px solid hsl(var(--tactus-hitl-border));
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+}
+
+/* Tabs list */
+.tactus-hitl-tabs {
+  margin-top: 1rem;
+}
+
+.tactus-hitl-tabs-list {
+  display: flex;
+  gap: 0.25rem;
+  border-bottom: 1px solid hsl(var(--tactus-hitl-border));
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Individual tab button */
+.tactus-hitl-tab {
+  position: relative;
+  padding: 0.75rem 1rem;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: hsl(var(--tactus-hitl-muted-foreground));
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tactus-hitl-tab:hover {
+  color: hsl(var(--tactus-hitl-foreground));
+  background-color: hsl(var(--tactus-hitl-accent));
+}
+
+.tactus-hitl-tab:focus-visible {
+  outline: 2px solid hsl(var(--tactus-hitl-ring));
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+
+/* Active tab */
+.tactus-hitl-tab-active {
+  color: hsl(var(--tactus-hitl-foreground));
+  border-bottom-color: hsl(var(--tactus-hitl-primary));
+}
+
+/* Completed tab */
+.tactus-hitl-tab-complete {
+  color: hsl(var(--tactus-hitl-foreground));
+}
+
+/* Tab label */
+.tactus-hitl-tab-label {
+  flex: 1;
+}
+
+/* Required indicator */
+.tactus-hitl-tab-required {
+  color: hsl(var(--tactus-hitl-destructive));
+  font-weight: 600;
+  margin-left: 0.125rem;
+}
+
+/* Completion check mark */
+.tactus-hitl-tab-check {
+  color: hsl(var(--tactus-hitl-primary));
+  font-weight: 600;
+}
+
+/* Tab content panel */
+.tactus-hitl-tabs-content {
+  min-height: 200px;
+}
+
+/* Hide individual component action buttons inside tabs */
+.tactus-hitl-tabs-content .tactus-hitl-actions {
+  display: none;
+}
+
+/* The main inputs panel actions (submit all) */
+.tactus-hitl-inputs > .tactus-hitl-actions {
+  margin-top: 1.5rem;
+}
+
+.tactus-hitl-escalation-context-list {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.tactus-hitl-escalation-context-item {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.25rem 0;
+}
+
+.tactus-hitl-escalation-context-item dt {
+  font-weight: 500;
+}
+
+.tactus-hitl-escalation-context-item dd {
+  margin: 0;
+}
+
+/* =============================================================================
+   Modal (Batched Inputs)
+   ============================================================================= */
+
+.tactus-hitl-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.tactus-hitl-modal-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: hsl(var(--tactus-hitl-foreground) / 0.4);
+  border: none;
+  padding: 0;
+}
+
+.tactus-hitl-modal-content {
+  position: relative;
+  z-index: 1;
+  width: min(960px, 100%);
+  max-height: 85vh;
+  overflow: hidden;
+  border-radius: calc(var(--tactus-hitl-radius) + 0.25rem);
+  background-color: hsl(var(--tactus-hitl-card));
+  color: hsl(var(--tactus-hitl-card-foreground));
+  border: 1px solid hsl(var(--tactus-hitl-border));
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px -30px hsl(var(--tactus-hitl-foreground) / 0.6);
+}
+
+.tactus-hitl-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid hsl(var(--tactus-hitl-border));
+  background-color: hsl(var(--tactus-hitl-muted));
+}
+
+.tactus-hitl-modal-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+  color: hsl(var(--tactus-hitl-foreground));
+}
+
+.tactus-hitl-modal-description {
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: hsl(var(--tactus-hitl-muted-foreground));
+}
+
+.tactus-hitl-modal-close {
+  border: none;
+  background: transparent;
+  font-size: 1rem;
+  font-weight: 600;
+  color: hsl(var(--tactus-hitl-muted-foreground));
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: calc(var(--tactus-hitl-radius) - 2px);
+  transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tactus-hitl-modal-close:hover {
+  background-color: hsl(var(--tactus-hitl-accent));
+  color: hsl(var(--tactus-hitl-foreground));
+}
+
+.tactus-hitl-modal-body {
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+/* =============================================================================
+   Constraints (Helper text)
+   ============================================================================= */
+
+.tactus-hitl-constraint {
+  margin: 0 0 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: hsl(var(--tactus-hitl-muted-foreground));
+}
+
+/* =============================================================================
+   Unknown Request Type (Alert variant)
+   ============================================================================= */
+
+.tactus-hitl-unknown {
+  padding: 1rem;
+  border-radius: var(--tactus-hitl-radius);
+  background-color: hsl(38 92% 50% / 0.1);
+  border: 1px solid hsl(38 92% 50% / 0.5);
+  color: hsl(var(--tactus-hitl-foreground));
+}
